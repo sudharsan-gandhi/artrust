@@ -52,4 +52,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 group :production do
 	gem 'mysql2', '>= 0.3.18', '< 0.5'
+	gem 'rails_12factor'
 end
