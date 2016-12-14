@@ -53,3 +53,4 @@ group :production do
 	gem 'mysql2', '>= 0.3.18', '< 0.5'
 	gem 'rails_12factor'
 end
+ruby "2.2.4"
