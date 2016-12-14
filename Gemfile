@@ -50,7 +50,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 group :production do
-	gem 'mysql2', '>= 0.3.18', '< 0.5'
+	gem 'pg'
 	gem 'rails_12factor'
 end
 ruby "2.2.4"
