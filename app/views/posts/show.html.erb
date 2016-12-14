@@ -1,0 +1,95 @@
+<div class="col-sm-8 col-sm-offset-2">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1><%= @post.Description %></h1>
+	</div>
+	<div class="panel-body">
+		<%= image_tag(@post.image.url(:medium)) %>
+	</div>
+	<div class="panel-footer">
+		<h4>Posted By:<%=@post.user.email%></h4>
+			<div class="btn-group">
+		<%-if current_user%>
+			<%= link_to like_post_path(@post),method: :put,class:"btn btn-default" do %>
+			<span class="glyphicon glyphicon-heart">
+			<%=@post.get_upvotes.size%>
+			</span>
+			<%end%>
+			<%= link_to dislike_post_path(@post),method: :put,class:"btn btn-default" do %>
+			<span class="glyphicon glyphicon-heart-empty">
+			<%=@post.get_downvotes.size%>
+			</span>
+			<%end%>
+			<%if current_user.id==@post.user_id%>
+				<%=link_to "Edit Post", edit_post_path, class:"btn btn-default btn-info"%>
+				<%=link_to "Delete Post", post_path, class:"btn btn-default btn-danger",method: :delete,data:{confirm:"Are You sure?"}%>
+			<%end%>
+		<%else%>
+			<%= link_to like_post_path(@post),method: :put,class:"btn btn-default", :disabled => true do %>
+			<span class="glyphicon glyphicon-heart">
+			<%=@post.get_upvotes.size%>
+			</span>
+			<%end%>
+			<%= link_to dislike_post_path(@post),method: :put,class:"btn btn-default", :disabled => true do %>	
+			<span class="glyphicon glyphicon-heart-empty">
+			<%=@post.get_downvotes.size%>
+			</span>
+			<%end%>
+		<%end%>
+	</div>
+</div>
+<%-unless current_user.nil?%>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>add comment</h1>
+	</div>
+	<div class="panel-body">
+		<%= form_for @comment, url: comments_post_path(@post) do |f| %>
+			<table>
+			<tr>
+			<td>
+				<%=f.label :title,"Expression" %>
+			</td>
+			<td>
+				<%=f.text_field :title ,:class => "form-control",required: true%>
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<%=f.label :comment%>
+			</td>
+			<td>
+				<%=f.text_area :comment,size: "50x2",:class => "form-control"%>
+			</td>
+			</tr><tr>
+			<td>
+			<button class="btn btn-default btn-info" type="submit">create post</button>
+			</td><td></td></tr></table>
+		<%end%>
+	</div>
+</div> 
+<%-if @pullcomments.size==0%>
+	<h4 class="panel panel-default panel-heading"> No Comments </h4>
+<%else%>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 >Comments</h4>
+		</div>
+		<div class="panel-body">
+			<ul class="list-group">
+			<%-@pullcomments.each do |f| %>
+  			<li class="list-group-item active"><%=f.title%></li>
+  			<%-unless f.comment.nil?%>
+  			<li class="list-group-item"><%=f.comment%></li>
+  			<%end%>
+  			<li class="list-group-item list-group-item-info">
+			<%=f.user.email%> <span class="pull-right"><%= f.updated_at.localtime%></span>
+  			</li>
+  			<br>
+			<%end%>
+			</ul>
+
+	</div>
+</div>
+<%end%>
+<%end%>

@@ -1,0 +1,23 @@
+<div id='posts' class="transitions-enabled">
+	<%- @posts.each do |x| %>
+		<div class="box panel panel-default">
+			<%= link_to (image_tag x.image.url(:medium)), x %>
+			<div class="panel-body">
+				<h2><%= link_to x.Description, x %></h2>
+		<!-- 		<div class="btn-group pull-right">
+					<%= link_to like_post_path(x),method: :put,class:"btn btn-default" do %>
+						<span class="glyphicon glyphicon-heart">
+							<%=x.get_upvotes.size%>
+						</span>
+					<%end%>
+					<%= link_to dislike_post_path(x),method: :put,class:"btn btn-default" do %>
+						<span class="glyphicon glyphicon-heart-empty">
+							<%=x.get_downvotes.size%>
+						</span>
+					<%end%>
+				</div> -->
+				<br><br>
+			</div>
+		</div>
+	<%end%>
+</div>

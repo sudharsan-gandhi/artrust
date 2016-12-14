@@ -1,0 +1,32 @@
+<div class="col-md-6 col-md-offset-3">
+<div class="row panel panel-default">
+	<div class="panel-heading">
+		<h1>Edit Post</h1>
+	</div>
+	<div class="panel-body">
+		<%= form_for @post,html:{multipart: true} do |f| %>
+			<table>
+			<tr>
+			<td>
+				<%=f.label :image%>
+			</td>
+			<td>
+				<%=f.file_field :image ,required: true%>
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<%=f.label :Description%>
+			</td>
+			<td>
+				<%=f.text_area :Description,style:'width:100%',required: true%>
+			</td>
+			<br>
+			<tr>
+			<td>
+			<button class="btn btn-default btn-info" type="submit">Update Post</button>
+			</td><td></td>
+		<%end%>
+	</div>
+</div>
+</div> 
