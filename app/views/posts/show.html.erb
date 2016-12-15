@@ -1,11 +1,17 @@
 <div class="col-sm-8 col-sm-offset-2">
 <div class="panel panel-default">
 	<div class="panel-heading">
+	<%- if @post.Description.length < 50 %>
 		<h1><%= @post.Description %></h1>
+	<%else%>
+		<h4><%= @post.Description %></h4>
+	<% end -%>
 	</div>
+	<%- if @post.image.present?%>
 	<div class="panel-body">
 		<%= image_tag(@post.image.url(:medium)) %>
-	</div>
+ 	</div>
+	<% end -%>
 	<div class="panel-footer">
 		<h4>Posted By:<%=@post.user.email%></h4>
 			<div class="btn-group">

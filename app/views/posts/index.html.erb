@@ -1,9 +1,15 @@
 <div id='posts' class="transitions-enabled">
 	<%- @posts.each do |x| %>
 		<div class="box panel panel-default">
+		<%-if x.image.present?%>
 			<%= link_to (image_tag x.image.url(:medium)), x %>
+			<% end -%>
 			<div class="panel-body">
+			<%- if x.Description.to_s.length < 20 %>
 				<h2><%= link_to x.Description, x %></h2>
+				<%else%>
+				<h4><%= link_to x.Description, x %></h4>
+			<%end -%>
 		<!-- 		<div class="btn-group pull-right">
 					<%= link_to like_post_path(x),method: :put,class:"btn btn-default" do %>
 						<span class="glyphicon glyphicon-heart">
